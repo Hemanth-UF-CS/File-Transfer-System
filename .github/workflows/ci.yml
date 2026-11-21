@@ -1,0 +1,16 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with warnings as errors
+        run: make CXXFLAGS="-std=c++17 -Wall -Wextra -Werror -O2 -pthread"
+      - name: Upload and download round trip
+        run: scripts/roundtrip_test.sh

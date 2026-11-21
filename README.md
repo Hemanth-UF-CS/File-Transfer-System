@@ -71,6 +71,12 @@ done
 wait
 ```
 
+## Test
+
+```bash
+make && scripts/roundtrip_test.sh   # 5 MB upload + download, compared byte for byte (runs in CI)
+```
+
 ## Tech
 
 C++17 · POSIX TCP sockets · `std::thread` · `std::mutex` · `std::filesystem` · chunked I/O

@@ -43,7 +43,7 @@ static int do_upload(const char* host, const std::string& filepath) {
     if (fd < 0) return 1;
 
     FileHeader hdr{};
-    std::strncpy(hdr.cmd, "UPLOAD", sizeof(hdr.cmd));
+    std::memcpy(hdr.cmd, "UPLOAD", 6);  // fixed-width field, not NUL-terminated
     std::strncpy(hdr.name, fname.c_str(), sizeof(hdr.name) - 1);
     hdr.size = size;
     send_all(fd, &hdr, sizeof(hdr));
@@ -73,7 +73,7 @@ static int do_download(const char* host, const std::string& fname) {
     if (fd < 0) return 1;
 
     FileHeader hdr{};
-    std::strncpy(hdr.cmd, "DOWNLOAD", sizeof(hdr.cmd));
+    std::memcpy(hdr.cmd, "DOWNLOAD", 8);
     std::strncpy(hdr.name, fname.c_str(), sizeof(hdr.name) - 1);
     hdr.size = 0;
     send_all(fd, &hdr, sizeof(hdr));

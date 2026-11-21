@@ -9,7 +9,7 @@ static constexpr size_t  BUF_SIZE = 65536;
 
 // Wire header for every transfer (sent before the file payload)
 struct FileHeader {
-    char     cmd[8];       // "UPLOAD" or "DOWNLOAD"
+    char     cmd[8];       // "UPLOAD" or "DOWNLOAD", fixed width, not NUL-terminated
     char     name[256];    // filename (null-terminated)
     uint64_t size;         // file size in bytes (0 for download requests)
 };
